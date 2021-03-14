@@ -11,8 +11,15 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::name('product.')
+    ->group(function () {
+        Route::get('/', 'ProductController@index')->name('index');
+        Route::get('/product/{id}', 'ProductController@show')->name('show');
+    });
 
-Route::get('/', 'ProductController@index')->name('product.index');
+
+
+// "workbench.colorCustomizations": {
+//     "editor.selectionBackground": "#9392a752",
+//     "editor.selectionHighlightBackground": "#ff009542"
+//   },
