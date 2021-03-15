@@ -16,10 +16,3 @@ Route::name('product.')
         Route::get('/', 'ProductController@index')->name('index');
         Route::get('/product/{id}', 'ProductController@show')->name('show');
     });
-
-
-
-// "workbench.colorCustomizations": {
-//     "editor.selectionBackground": "#9392a752",
-//     "editor.selectionHighlightBackground": "#ff009542"
-//   },
