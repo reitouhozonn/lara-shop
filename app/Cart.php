@@ -5,16 +5,16 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Product extends Model
+class Cart extends Model
 {
     /**
-     * The carts that belong to the Product
+     * The products that belong to the Cart
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function carts(): BelongsToMany
+    public function products(): BelongsToMany
     {
-        return $this->belongsToMany(Cart::class, 'line_items',)
-            ->withPivot('id', 'quantity');
+        return $this->belongsToMany(Product::class, 'line_items',)
+            ->withPivot(['id', 'quantity']);
     }
 }

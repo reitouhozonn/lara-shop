@@ -16,3 +16,9 @@ Route::name('product.')
         Route::get('/', 'ProductController@index')->name('index');
         Route::get('/product/{id}', 'ProductController@show')->name('show');
     });
+
+Route::prefix('/line_item')
+    ->name('line_item.')
+    ->group(function () {
+    Route::post('/create', 'LineItemController@create')->name('create');
+});
