@@ -95,8 +95,10 @@ class LineItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(Request $request)
     {
-        //
+        LineItem::destroy($request->input('id'));
+
+        return redirect(route('cart.index'));
     }
 }

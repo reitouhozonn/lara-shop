@@ -20,5 +20,14 @@ Route::name('product.')
 Route::prefix('/line_item')
     ->name('line_item.')
     ->group(function () {
-    Route::post('/create', 'LineItemController@create')->name('create');
+        Route::post('/create', 'LineItemController@create')->name('create');
+        Route::post('/delete', 'LineItemController@delete')->name('delete');
+});
+
+Route::prefix('/cart')
+    ->name('cart.')
+    ->group(function () {
+        Route::get('', 'CartController@index')->name('index');
+        Route::get('/checkout', 'CartController@checkout')->name('checkout');
+        Route::get('/success', 'CartController@success')->name('success');            
 });
