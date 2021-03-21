@@ -58,6 +58,7 @@ class CartController extends Controller
         $session = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
             'line_items' => [$line_items],
+            'shipping_address_collection' => [],
             'success_url' => route('cart.success'),
             'cancel_url' => route('cart.index'),
         ]);
