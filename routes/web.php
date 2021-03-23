@@ -26,6 +26,7 @@ Route::prefix('/line_item')
 
 Route::prefix('/cart')
     ->name('cart.')
+    ->middleware('sesstionget')
     ->group(function () {
         Route::get('', 'CartController@index')->name('index');
         Route::get('/checkout', 'CartController@checkout')->name('checkout');

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Cart;
 use App\LineItem;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class CartController extends Controller
 {
@@ -19,6 +20,7 @@ class CartController extends Controller
         $cart_id = Session::get('cart');
         // $cart_id = $request->session()->get('cart');
         $cart = Cart::find($cart_id);
+        // dd($cart);
 
         $total_price = 0;
         foreach ($cart->products as $product) {
@@ -32,7 +34,7 @@ class CartController extends Controller
             ]);
     }
 
-    public function checkout()
+    public function checkout(Request $request)
     {
         $cart_id = Session::get('cart');
         $cart = Cart::find($cart_id);
@@ -57,8 +59,11 @@ class CartController extends Controller
 
         $session = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
+            'billing_address_collection' => 'auto',
+            'shipping_address_collection' => [
+            'allowed_countries' => ['JP'],
+            ],
             'line_items' => [$line_items],
-            'shipping_address_collection' => [],
             'success_url' => route('cart.success'),
             'cancel_url' => route('cart.index'),
         ]);
@@ -69,7 +74,7 @@ class CartController extends Controller
         ]);
     }
 
-    public function success()
+    public function success(Request $request)
     {
         $cart_id = Session::get('cart');
         LineItem::where('cart_id', $cart_id)->delete();
