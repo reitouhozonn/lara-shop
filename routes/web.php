@@ -11,6 +11,8 @@
 |
 */
 
+use PHPUnit\Framework\Test;
+
 Route::name('product.')
     ->group(function () {
         Route::get('/', 'ProductController@index')->name('index');
@@ -32,3 +34,4 @@ Route::prefix('/cart')
         Route::get('/checkout', 'CartController@checkout')->name('checkout');
         Route::get('/success', 'CartController@success')->name('success');            
 });
+// Test
